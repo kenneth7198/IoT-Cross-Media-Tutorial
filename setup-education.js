@@ -79,10 +79,6 @@ async function askInstallationOptions() {
                 {
                     name: '⚡ 精簡版 (只有核心功能)',
                     value: 'minimal'
-                },
-                {
-                    name: '🔧 開發者版 (包含除錯工具)',
-                    value: 'developer'
                 }
             ]
         },
@@ -122,10 +118,10 @@ async function performInstallation(options) {
     // 4. 初始化資料庫
     await initializeDatabase(options);
     
-    // 5. 設定教學內容
-    if (options.includeExamples) {
-        await setupTutorialContent(options);
-    }
+    // // 5. 設定教學內容
+    // if (options.includeExamples) {
+    //     await setupTutorialContent(options);
+    // }
     
     // 6. 建立啟動腳本
     await createStartupScripts();
@@ -148,13 +144,6 @@ async function createProjectStructure(options) {
             'backend-simple/src/simulators',
             'backend-simple/database',
             'backend-simple/scripts',
-            'tutorials',
-            'examples/api-examples',
-            'examples/component-examples',
-            'examples/iot-examples',
-            'tools/code-checker',
-            'tools/progress-tracker',
-            'tools/deployment-helper'
         ];
         
         for (const dir of directories) {
