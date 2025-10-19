@@ -1,23 +1,88 @@
-# ESP32 + MQTT 3~5 小時工作坊
+# ESP32 + MQTT + Processing 工作坊完整教材
 
-本工作坊將用 4 個 ESP32 範例逐步完成 IoT 到 Web 的端到端串接：
-- MQTT Broker 架設（Windows）
-- Topic 與 Payload 設計
-- ESP32 端（Arduino）發佈/訂閱
-- 手機端網頁（MQTT over WebSocket）
-- 前後端架構與資料流講解
-- 投影片（Marp）與講義
+**🎯 4 小時從零開始建立 IoT 視覺互動系統**
 
-## 課程節奏建議（約 4 小時，可調至 3~5 小時）
-1) 30~45 分鐘：環境安裝 + Broker 架設
-2) 45~60 分鐘：ESP32 基礎 IO 與接線（LED/按鈕/光敏/電容）
-3) 60 分鐘：MQTT 入門與四個範例跑通
-4) 30 分鐘：手機網頁 + WebSocket 測試
-5) 15 分鐘：整體架構與實作 Q&A
+這是一個完整的 ESP32 + MQTT + Processing 視覺互動工作坊教材，涵蓋硬體、軟體、網頁、視覺藝術四個面向。
 
-## 內容目錄
-- **快速啟動**：`QUICKSTART.md` ⭐ 新手從這開始
-- 安裝指南：`install.md`
+---
+
+## 📖 教材文件
+
+### 👨‍🏫 講師用
+- **[TEACHING_PLAN.md](./TEACHING_PLAN.md)** - 完整教學計畫（240 分鐘詳細流程）⭐
+- **[TEACHING_QUICKREF.md](./TEACHING_QUICKREF.md)** - 快速參考卡（隨時查閱）
+- **[CHECKLIST.md](./CHECKLIST.md)** - 課前準備清單
+- **[SUMMARY.md](./SUMMARY.md)** - 教材總覽
+
+### 👨‍🎓 學員用
+- **[STUDENT_GUIDE.md](./STUDENT_GUIDE.md)** - 學員操作手冊（完整步驟）⭐
+- **[QUICKSTART.md](./QUICKSTART.md)** - 15 分鐘快速開始
+- **[install.md](./install.md)** - 軟體安裝指南
+- **[QA.md](./QA.md)** - 常見問題
+
+### 📚 技術文件
+- **[materials.md](./materials.md)** - 課程大綱與時間規劃
+- **[topics.md](./topics.md)** - MQTT Topic 設計說明
+- **[assets/wiring.md](./assets/wiring.md)** - 接線圖與電路說明
+- **[assets/architecture.md](./assets/architecture.md)** - 系統架構圖
+
+---
+
+## 🎯 學習目標
+
+完成工作坊後，學員將能夠：
+- ✅ 理解 IoT 架構與 MQTT 協定
+- ✅ 掌握 ESP32 開發（GPIO、ADC、WiFi、MQTT）
+- ✅ 實作手機網頁控制（含搖晃偵測）
+- ✅ 整合 Processing 視覺藝術
+- ✅ 創作互動藝術作品
+
+---
+
+## 📋 課程大綱（4 小時）
+
+| 時段 | 時長 | 主題 | 檢查點 |
+|------|------|------|--------|
+| Part 1 | 60min | IoT 基礎 + 環境設定 | LED 閃爍 ✅ |
+| Part 2 | 60min | ESP32 基礎互動 | 感測器正常 ✅ |
+| 休息 | 15min | 中場休息 ☕ | - |
+| Part 3 | 60min | MQTT 整合 + 手機控制 | 手機控制 LED ✅ |
+| Part 4 | 45min | Processing 視覺藝術 | 視覺效果出現 ✅ |
+
+**詳細教學流程**：[TEACHING_PLAN.md](./TEACHING_PLAN.md)
+
+---
+
+## 🚀 快速開始
+
+### 講師（課前準備）
+
+1. **啟動 MQTT Broker**
+   ```powershell
+   cd server
+   npm install
+   node broker.js
+   ```
+
+2. **啟動 Web Server**
+   ```powershell
+   cd web
+   .\serve.ps1
+   ```
+
+3. **參考教學計畫**
+   - 詳細流程：[TEACHING_PLAN.md](./TEACHING_PLAN.md)
+   - 快速查閱：[TEACHING_QUICKREF.md](./TEACHING_QUICKREF.md)
+
+### 學員（跟著操作）
+
+1. **安裝軟體** - 參考：[install.md](./install.md)
+2. **硬體測試** - 參考：[STUDENT_GUIDE.md](./STUDENT_GUIDE.md)
+3. **開始實驗** - 參考：[QUICKSTART.md](./QUICKSTART.md)
+
+---
+
+## 🎨 教材內容
 - 講義與大綱：`materials.md`
 - Topic 與訊息格式：`topics.md`
 - ESP32 程式碼：`arduino/`
