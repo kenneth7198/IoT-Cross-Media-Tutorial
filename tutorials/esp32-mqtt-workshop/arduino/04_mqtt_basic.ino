@@ -2,12 +2,19 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
-// ---- 修改為你的 Wi-Fi 與 Broker ----
-const char* WIFI_SSID = "YOUR_WIFI";
-const char* WIFI_PASS = "YOUR_PASS";
-const char* MQTT_HOST = "192.168.1.100"; // 或本機 IP
-const uint16_t MQTT_PORT = 1883; // Mosquitto TCP
-const char* DEVICE_ID = "esp32-01";
+// ---- WiFi 與 MQTT 設定 ----
+const char* WIFI_SSID = "NetArt";
+const char* WIFI_PASS = "1qaz2wsx";
+
+// 固定 IP 設定
+IPAddress local_IP(192, 168, 100, 201);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress gateway(192, 168, 100, 1);
+IPAddress dns(8, 8, 8, 8);
+
+const char* MQTT_HOST = "192.168.100.1"; // MQTT Broker IP
+const uint16_t MQTT_PORT = 1883;
+const char* DEVICE_ID = "esp32-01";  // 每個裝置要不同！
 
 // 腳位
 const int LED_PIN = 23;
@@ -41,10 +48,21 @@ void onMqtt(char* topic, byte* payload, unsigned int len){
 void ensureWiFi(){
   if (WiFi.status() == WL_CONNECTED) return;
   WiFi.mode(WIFI_STA);
+  
+  // 設定固定 IP
+  if (!WiFi.config(local_IP, gateway, subnet, dns)) {
+    Serial.println("Static IP Failed!");
+  }
+  
   WiFi.begin(WIFI_SSID, WIFI_PASS);
-  Serial.print("WiFi...");
-  while (WiFi.status() != WL_CONNECTED){ delay(300); Serial.print("."); }
-  Serial.println("OK " + WiFi.localIP().toString());
+  Serial.print("WiFi connecting");
+  while (WiFi.status() != WL_CONNECTED){ 
+    delay(300); 
+    Serial.print("."); 
+  }
+  Serial.println(" OK");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
 }
 
 void ensureMqtt(){

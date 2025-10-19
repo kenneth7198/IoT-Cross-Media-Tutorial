@@ -8,6 +8,12 @@
 #include <PubSubClient.h>
 #include "../config.h"
 
+// 固定 IP 設定
+IPAddress local_IP(192, 168, 100, 201);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress gateway(192, 168, 100, 1);
+IPAddress dns(8, 8, 8, 8);
+
 const int PIN_R = 25;
 const int PIN_G = 26;
 const int PIN_B = 27;
@@ -51,8 +57,21 @@ void onMqtt(char* topic, byte* payload, unsigned int len) {
 void ensureWiFi() {
   if (WiFi.status() == WL_CONNECTED) return;
   WiFi.mode(WIFI_STA);
+  
+  // 設定固定 IP
+  if (!WiFi.config(local_IP, gateway, subnet, dns)) {
+    Serial.println("Static IP Failed!");
+  }
+  
   WiFi.begin(WIFI_SSID, WIFI_PASS);
-  while (WiFi.status() != WL_CONNECTED) { delay(300); }
+  Serial.print("WiFi connecting");
+  while (WiFi.status() != WL_CONNECTED) { 
+    delay(300); 
+    Serial.print("."); 
+  }
+  Serial.println(" OK");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
 }
 
 void ensureMqtt() {
